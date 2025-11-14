@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Cards Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">🛍️ ShopHub</div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">Products</a>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="cart-icon">
+                    🛒 <span class="cart-count">3</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Featured Products</h1>
+            <p>Discover our collection of premium products</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Electronics</button>
+                <button class="filter-btn">Fashion</button>
+                <button class="filter-btn">Home</button>
+                <button class="filter-btn">Sports</button>
+            </div>
+            <select class="sort-select">
+                <option>Sort by: Popular</option>
+                <option>Price: Low to High</option>
+                <option>Price: High to Low</option>
+                <option>Newest</option>
+            </select>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="product-badge">New</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">📱</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Wireless Headphones</h3>
+                        <p class="product-description">Premium noise-cancelling headphones with superior sound quality</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ <span>(128 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$299.99</span>
+                                <span class="original-price">$399.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <div class="product-badge sale">Sale</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">⌚</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Smart Watch Pro</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐☆ <span>(96 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$199.99</span>
+                                <span class="original-price">$279.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="image-placeholder">💻</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Laptop Stand</h3>
+                        <p class="product-description">Ergonomic aluminum laptop stand for better posture</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ <span>(245 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$49.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="product-card">
+                    <div class="product-badge">Bestseller</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">🎒</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Travel Backpack</h3>
+                        <p class="product-description">Durable water-resistant backpack with USB charging port</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ <span>(312 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$89.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="image-placeholder">🎧</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Wireless Earbuds</h3>
+                        <p class="product-description">True wireless earbuds with 24hr battery life</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐☆ <span>(189 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$129.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="product-card">
+                    <div class="product-badge sale">Sale</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">🖱️</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gaming Mouse</h3>
+                        <p class="product-description">Precision gaming mouse with RGB lighting</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ <span>(156 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$59.99</span>
+                                <span class="original-price">$79.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <div class="image-placeholder">⌨️</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Mechanical Keyboard</h3>
+                        <p class="product-description">Premium mechanical keyboard with custom switches</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐⭐ <span>(203 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$149.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 8 -->
+                <div class="product-card">
+                    <div class="product-badge">New</div>
+                    <div class="product-image">
+                        <div class="image-placeholder">📷</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Action Camera</h3>
+                        <p class="product-description">4K waterproof action camera for adventures</p>
+                        <div class="product-rating">
+                            ⭐⭐⭐⭐☆ <span>(87 reviews)</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price">
+                                <span class="price">$249.99</span>
+                            </div>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back Link -->
+    <section class="back-section">
+        <div class="container">
+            <a href="../../index.html" class="back-link">← Back to Prototypes</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 ShopHub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

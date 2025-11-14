@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Dashboard</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <span class="icon">📊</span>
+                    Overview
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📈</span>
+                    Analytics
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">👥</span>
+                    Users
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">💰</span>
+                    Revenue
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">⚙️</span>
+                    Settings
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1>Analytics Overview</h1>
+                    <p>Welcome back! Here's what's happening with your business today.</p>
+                </div>
+                <div class="header-right">
+                    <button class="btn">Export Report</button>
+                </div>
+            </header>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue">👤</div>
+                    <div class="stat-details">
+                        <h3>Total Users</h3>
+                        <p class="stat-value">24,582</p>
+                        <span class="stat-change positive">+12.5%</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">💵</div>
+                    <div class="stat-details">
+                        <h3>Revenue</h3>
+                        <p class="stat-value">$84,250</p>
+                        <span class="stat-change positive">+8.2%</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple">📦</div>
+                    <div class="stat-details">
+                        <h3>Orders</h3>
+                        <p class="stat-value">1,438</p>
+                        <span class="stat-change negative">-3.1%</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">⭐</div>
+                    <div class="stat-details">
+                        <h3>Satisfaction</h3>
+                        <p class="stat-value">4.8/5.0</p>
+                        <span class="stat-change positive">+0.3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="charts-section">
+                <div class="chart-card large">
+                    <div class="card-header">
+                        <h3>Revenue Overview</h3>
+                        <select class="time-selector">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 90 days</option>
+                        </select>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="bar-chart">
+                            <div class="bar" style="height: 60%"></div>
+                            <div class="bar" style="height: 75%"></div>
+                            <div class="bar" style="height: 45%"></div>
+                            <div class="bar" style="height: 90%"></div>
+                            <div class="bar" style="height: 70%"></div>
+                            <div class="bar" style="height: 85%"></div>
+                            <div class="bar" style="height: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Traffic Sources</h3>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="donut-chart">
+                            <div class="donut-hole"></div>
+                        </div>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <span class="dot blue"></span>
+                                <span>Direct: 45%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="dot green"></span>
+                                <span>Social: 30%</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="dot purple"></span>
+                                <span>Referral: 25%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section">
+                <div class="card-header">
+                    <h3>Recent Activity</h3>
+                </div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon blue">🛒</div>
+                        <div class="activity-content">
+                            <p><strong>New order #4821</strong> from John Doe</p>
+                            <span class="activity-time">2 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon green">👤</div>
+                        <div class="activity-content">
+                            <p><strong>New user registered:</strong> jane.smith@email.com</p>
+                            <span class="activity-time">15 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon purple">💳</div>
+                        <div class="activity-content">
+                            <p><strong>Payment received:</strong> $2,450.00</p>
+                            <span class="activity-time">1 hour ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon orange">⚠️</div>
+                        <div class="activity-content">
+                            <p><strong>System alert:</strong> Server load is high</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back Link -->
+            <div class="back-section">
+                <a href="../../index.html" class="back-link">← Back to Prototypes</a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
