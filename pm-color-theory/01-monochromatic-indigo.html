@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orbit — Monochromatic Indigo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * COLOR THEORY: MONOCHROMATIC
+     * Using a single hue (indigo ~240°) with variations in:
+     * - Lightness: 5% to 95%
+     * - Saturation: 15% to 85%
+     * Creates depth through tonal contrast while maintaining visual unity
+     */
+
+    :root {
+      /* Indigo scale - same hue (245°), varying saturation and lightness */
+      --indigo-950: hsl(245, 58%, 5%);
+      --indigo-900: hsl(245, 55%, 10%);
+      --indigo-850: hsl(245, 52%, 14%);
+      --indigo-800: hsl(245, 48%, 18%);
+      --indigo-700: hsl(245, 45%, 25%);
+      --indigo-600: hsl(245, 42%, 35%);
+      --indigo-500: hsl(245, 40%, 45%);
+      --indigo-400: hsl(245, 45%, 60%);
+      --indigo-300: hsl(245, 50%, 75%);
+      --indigo-200: hsl(245, 55%, 85%);
+      --indigo-100: hsl(245, 60%, 92%);
+      --indigo-50: hsl(245, 65%, 97%);
+
+      /* Accent - same hue, high saturation for emphasis */
+      --accent: hsl(245, 85%, 65%);
+      --accent-glow: hsl(245, 90%, 70%);
+
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--indigo-950);
+      color: var(--indigo-200);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Layout */
+    .app {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: var(--indigo-900);
+      border-right: 1px solid var(--indigo-800);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--indigo-50);
+      margin-bottom: 40px;
+      padding-left: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-section {
+      margin-bottom: 32px;
+    }
+
+    .nav-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--indigo-500);
+      padding: 0 12px;
+      margin-bottom: 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      color: var(--indigo-300);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nav-item:hover {
+      background: var(--indigo-850);
+      color: var(--indigo-100);
+    }
+
+    .nav-item.active {
+      background: var(--indigo-800);
+      color: var(--indigo-50);
+    }
+
+    .nav-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.7;
+    }
+
+    .nav-item.active .nav-icon {
+      opacity: 1;
+    }
+
+    .team-section {
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--indigo-800);
+    }
+
+    .team-avatars {
+      display: flex;
+      padding: 0 12px;
+      margin-top: 12px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--indigo-900);
+      margin-left: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .avatar:first-child { margin-left: 0; }
+    .avatar-1 { background: var(--indigo-600); color: var(--indigo-100); }
+    .avatar-2 { background: var(--indigo-500); color: var(--indigo-50); }
+    .avatar-3 { background: var(--indigo-400); color: var(--indigo-950); }
+    .avatar-4 { background: var(--accent); color: var(--indigo-950); }
+
+    /* Main content */
+    .main {
+      padding: 32px 40px;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 42px;
+      color: var(--indigo-50);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      color: var(--indigo-400);
+      font-size: 15px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s ease;
+    }
+
+    .btn-secondary {
+      background: var(--indigo-800);
+      color: var(--indigo-200);
+    }
+
+    .btn-secondary:hover {
+      background: var(--indigo-700);
+      color: var(--indigo-100);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--indigo-950);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-glow);
+      box-shadow: 0 4px 20px hsla(245, 85%, 65%, 0.3);
+    }
+
+    /* Board */
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .column {
+      background: var(--indigo-900);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      border: 1px solid var(--indigo-850);
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding: 0 4px;
+    }
+
+    .column-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--indigo-300);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .column-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .dot-backlog { background: var(--indigo-600); }
+    .dot-progress { background: var(--indigo-400); }
+    .dot-review { background: var(--accent); }
+    .dot-done { background: var(--indigo-300); }
+
+    .column-count {
+      font-size: 12px;
+      color: var(--indigo-500);
+      background: var(--indigo-850);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--indigo-850);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      border: 1px solid var(--indigo-800);
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--indigo-700);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px hsla(245, 58%, 5%, 0.5);
+    }
+
+    .card-id {
+      font-size: 11px;
+      color: var(--indigo-500);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      color: var(--indigo-100);
+      font-weight: 500;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* Tags using monochromatic variations */
+    .tag-feature { background: var(--indigo-700); color: var(--indigo-200); }
+    .tag-bug { background: var(--indigo-600); color: var(--indigo-100); }
+    .tag-design { background: var(--indigo-500); color: var(--indigo-50); }
+    .tag-urgent { background: var(--accent); color: var(--indigo-950); }
+
+    .card-assignee {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .card-priority {
+      display: flex;
+      gap: 2px;
+      margin-top: 12px;
+    }
+
+    .priority-bar {
+      width: 16px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--indigo-700);
+    }
+
+    .priority-bar.filled {
+      background: var(--indigo-400);
+    }
+
+    .priority-bar.filled.high {
+      background: var(--accent);
+    }
+
+    /* Footer stats */
+    .stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+      padding: 24px;
+      background: var(--indigo-900);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--indigo-850);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 32px;
+      color: var(--indigo-50);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--indigo-500);
+    }
+
+    .stat-bar {
+      width: 120px;
+      height: 4px;
+      background: var(--indigo-800);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+    }
+
+    .fill-1 { width: 75%; background: var(--indigo-400); }
+    .fill-2 { width: 45%; background: var(--indigo-500); }
+    .fill-3 { width: 90%; background: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">Orbit<span>.</span></div>
+
+      <nav class="nav-section">
+        <div class="nav-label">Workspace</div>
+        <div class="nav-item active">
+          <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          Board
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          Backlog
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          Timeline
+        </div>
+        <div class="nav-item">
+          <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Insights
+        </div>
+      </nav>
+
+      <nav class="nav-section">
+        <div class="nav-label">Projects</div>
+        <div class="nav-item">
+          <span style="width: 18px; text-align: center;">◆</span>
+          Website Redesign
+        </div>
+        <div class="nav-item">
+          <span style="width: 18px; text-align: center;">◇</span>
+          Mobile App v2
+        </div>
+        <div class="nav-item">
+          <span style="width: 18px; text-align: center;">○</span>
+          API Integration
+        </div>
+      </nav>
+
+      <div class="team-section">
+        <div class="nav-label">Team</div>
+        <div class="team-avatars">
+          <div class="avatar avatar-1">JK</div>
+          <div class="avatar avatar-2">AL</div>
+          <div class="avatar avatar-3">MR</div>
+          <div class="avatar avatar-4">+3</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="header">
+        <div>
+          <h1 class="page-title">Sprint 24</h1>
+          <p class="page-subtitle">Dec 16 — Dec 30 · 14 issues</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary">Filter</button>
+          <button class="btn btn-primary">+ New Issue</button>
+        </div>
+      </header>
+
+      <div class="board">
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title">
+              <span class="column-dot dot-backlog"></span>
+              Backlog
+            </div>
+            <span class="column-count">4</span>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-id">ORB-142</div>
+              <div class="card-title">Set up CI/CD pipeline for staging</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-feature">Feature</span>
+                </div>
+                <div class="avatar avatar-2" style="width:24px;height:24px;font-size:10px;">AL</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar"></span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-id">ORB-143</div>
+              <div class="card-title">Research analytics providers</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-design">Research</span>
+                </div>
+                <div class="avatar avatar-3" style="width:24px;height:24px;font-size:10px;">MR</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar"></span>
+                <span class="priority-bar"></span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-id">ORB-144</div>
+              <div class="card-title">Update onboarding flow copy</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-design">Design</span>
+                </div>
+                <div class="avatar avatar-1" style="width:24px;height:24px;font-size:10px;">JK</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar"></span>
+                <span class="priority-bar"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title">
+              <span class="column-dot dot-progress"></span>
+              In Progress
+            </div>
+            <span class="column-count">3</span>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-id">ORB-138</div>
+              <div class="card-title">Implement dark mode toggle</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-feature">Feature</span>
+                </div>
+                <div class="avatar avatar-1" style="width:24px;height:24px;font-size:10px;">JK</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar filled high"></span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-id">ORB-139</div>
+              <div class="card-title">Fix memory leak in dashboard</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-urgent">Urgent</span>
+                </div>
+                <div class="avatar avatar-2" style="width:24px;height:24px;font-size:10px;">AL</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled high"></span>
+                <span class="priority-bar filled high"></span>
+                <span class="priority-bar filled high"></span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-id">ORB-140</div>
+              <div class="card-title">Add keyboard shortcuts</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-feature">Feature</span>
+                </div>
+                <div class="avatar avatar-3" style="width:24px;height:24px;font-size:10px;">MR</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title">
+              <span class="column-dot dot-review"></span>
+              Review
+            </div>
+            <span class="column-count">2</span>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-id">ORB-135</div>
+              <div class="card-title">Refactor authentication module</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-feature">Feature</span>
+                </div>
+                <div class="avatar avatar-2" style="width:24px;height:24px;font-size:10px;">AL</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar filled"></span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-id">ORB-136</div>
+              <div class="card-title">Update API documentation</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-design">Docs</span>
+                </div>
+                <div class="avatar avatar-1" style="width:24px;height:24px;font-size:10px;">JK</div>
+              </div>
+              <div class="card-priority">
+                <span class="priority-bar filled"></span>
+                <span class="priority-bar"></span>
+                <span class="priority-bar"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title">
+              <span class="column-dot dot-done"></span>
+              Done
+            </div>
+            <span class="column-count">5</span>
+          </div>
+          <div class="cards">
+            <div class="card" style="opacity: 0.7;">
+              <div class="card-id">ORB-130</div>
+              <div class="card-title">Set up error tracking</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-feature">Feature</span>
+                </div>
+                <div class="avatar avatar-3" style="width:24px;height:24px;font-size:10px;">MR</div>
+              </div>
+            </div>
+            <div class="card" style="opacity: 0.7;">
+              <div class="card-id">ORB-131</div>
+              <div class="card-title">Migrate database schema</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-bug">Backend</span>
+                </div>
+                <div class="avatar avatar-2" style="width:24px;height:24px;font-size:10px;">AL</div>
+              </div>
+            </div>
+            <div class="card" style="opacity: 0.7;">
+              <div class="card-id">ORB-132</div>
+              <div class="card-title">Design new landing page</div>
+              <div class="card-meta">
+                <div class="card-tags">
+                  <span class="tag tag-design">Design</span>
+                </div>
+                <div class="avatar avatar-1" style="width:24px;height:24px;font-size:10px;">JK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Tasks completed this week</div>
+          <div class="stat-bar"><div class="stat-bar-fill fill-1"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Blocked issues</div>
+          <div class="stat-bar"><div class="stat-bar-fill fill-2"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">89%</div>
+          <div class="stat-label">Sprint progress</div>
+          <div class="stat-bar"><div class="stat-bar-fill fill-3"></div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spark — Triadic Bold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * COLOR THEORY: TRIADIC
+     * Three hues 120° apart on the color wheel:
+     * - Electric Blue: ~220° (primary/dominant)
+     * - Hot Pink/Magenta: ~340° (secondary accent)
+     * - Lime/Chartreuse: ~100° (tertiary accent)
+     * Creates vibrant, balanced energy
+     * Strategy: Blue dominant, pink/lime as strategic accents
+     */
+
+    :root {
+      /* Electric Blue scale (~220°) - dominant */
+      --blue-950: hsl(220, 60%, 6%);
+      --blue-900: hsl(220, 55%, 10%);
+      --blue-800: hsl(220, 50%, 16%);
+      --blue-700: hsl(220, 50%, 24%);
+      --blue-600: hsl(220, 55%, 35%);
+      --blue-500: hsl(220, 70%, 50%);
+      --blue-400: hsl(220, 80%, 62%);
+      --blue-300: hsl(220, 85%, 75%);
+      --blue-200: hsl(220, 80%, 88%);
+      --blue-100: hsl(220, 70%, 95%);
+
+      /* Hot Pink/Magenta scale (~340°) - secondary */
+      --pink-600: hsl(340, 80%, 45%);
+      --pink-500: hsl(340, 85%, 55%);
+      --pink-400: hsl(340, 90%, 65%);
+      --pink-300: hsl(340, 85%, 78%);
+      --pink-200: hsl(340, 75%, 90%);
+
+      /* Lime/Chartreuse scale (~100°) - tertiary */
+      --lime-600: hsl(100, 70%, 35%);
+      --lime-500: hsl(100, 75%, 45%);
+      --lime-400: hsl(100, 80%, 55%);
+      --lime-300: hsl(100, 75%, 70%);
+      --lime-200: hsl(100, 65%, 88%);
+
+      /* Neutrals - cool tinted */
+      --neutral-950: hsl(220, 25%, 6%);
+      --neutral-900: hsl(220, 20%, 10%);
+      --neutral-800: hsl(220, 15%, 16%);
+      --neutral-700: hsl(220, 12%, 26%);
+      --neutral-600: hsl(220, 10%, 38%);
+      --neutral-500: hsl(220, 8%, 50%);
+      --neutral-400: hsl(220, 10%, 65%);
+      --neutral-300: hsl(220, 12%, 78%);
+      --neutral-200: hsl(220, 15%, 90%);
+      --neutral-100: hsl(220, 20%, 96%);
+      --neutral-50: hsl(220, 25%, 99%);
+
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Outfit', -apple-system, sans-serif;
+
+      /* Base-4 Grid System (4px module) */
+      --base: 4px;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--neutral-950);
+      color: var(--neutral-200);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Gradient mesh background */
+    .app {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .app::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 10%, hsla(220, 70%, 50%, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, hsla(340, 85%, 55%, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 30% at 70% 20%, hsla(100, 75%, 45%, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Icon sidebar */
+    .sidebar {
+      background: var(--neutral-900);
+      border-right: 1px solid var(--neutral-800);
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--blue-500) 0%, var(--pink-500) 100%);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .logo svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+
+    .nav-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-500);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .nav-icon:hover {
+      background: var(--neutral-800);
+      color: var(--neutral-300);
+    }
+
+    .nav-icon.active {
+      background: var(--blue-500);
+      color: white;
+    }
+
+    .nav-icon.active::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 24px;
+      background: var(--pink-400);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .nav-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .nav-divider {
+      width: 28px;
+      height: 1px;
+      background: var(--neutral-800);
+      margin: 12px 0;
+    }
+
+    .nav-badge {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 8px;
+      height: 8px;
+      background: var(--pink-500);
+      border-radius: 50%;
+      border: 2px solid var(--neutral-900);
+    }
+
+    /* Main content */
+    .main {
+      padding: 28px 36px;
+      position: relative;
+      z-index: 1;
+      overflow-y: auto;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .project-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--neutral-900);
+      border: 1px solid var(--neutral-800);
+      border-radius: 100px;
+    }
+
+    .project-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      background: linear-gradient(135deg, var(--pink-500), var(--lime-400));
+    }
+
+    .project-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--neutral-300);
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--neutral-50);
+      letter-spacing: -0.02em;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ghost {
+      background: var(--neutral-900);
+      color: var(--neutral-300);
+      border: 1px solid var(--neutral-800);
+    }
+
+    .btn-ghost:hover {
+      background: var(--neutral-800);
+      color: var(--neutral-100);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue-500) 0%, var(--blue-400) 100%);
+      color: white;
+      box-shadow: 0 4px 16px hsla(220, 70%, 50%, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px hsla(220, 70%, 50%, 0.5);
+    }
+
+    /* Quick stats */
+    .quick-stats {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .quick-stat {
+      padding: 16px 24px;
+      background: var(--neutral-900);
+      border: 1px solid var(--neutral-800);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-icon.blue { background: hsla(220, 70%, 50%, 0.15); color: var(--blue-400); }
+    .stat-icon.pink { background: hsla(340, 85%, 55%, 0.15); color: var(--pink-400); }
+    .stat-icon.lime { background: hsla(100, 75%, 45%, 0.15); color: var(--lime-400); }
+
+    .stat-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .stat-content {
+      flex: 1;
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--neutral-50);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--neutral-500);
+    }
+
+    /* Board */
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .column {
+      background: var(--neutral-900);
+      border: 1px solid var(--neutral-800);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .column-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .column-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Using triadic colors for column status */
+    .dot-todo { background: var(--neutral-500); }
+    .dot-progress { background: var(--blue-500); }
+    .dot-review { background: var(--pink-500); }
+    .dot-done { background: var(--lime-500); }
+
+    .column-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--neutral-200);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .column-add {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--neutral-800);
+      color: var(--neutral-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .column-add:hover {
+      background: var(--neutral-700);
+      color: var(--neutral-300);
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card {
+      background: var(--neutral-950);
+      border: 1px solid var(--neutral-800);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: var(--blue-600);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    /* Triadic colors for card types */
+    .icon-epic { background: var(--blue-500); color: white; }
+    .icon-story { background: var(--pink-500); color: white; }
+    .icon-task { background: var(--lime-500); color: var(--neutral-950); }
+    .icon-bug { background: var(--pink-600); color: white; }
+
+    .card-id {
+      font-size: 11px;
+      color: var(--neutral-500);
+      font-weight: 600;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--neutral-100);
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-labels {
+      display: flex;
+      gap: 4px;
+    }
+
+    .label {
+      width: 32px;
+      height: 6px;
+      border-radius: 3px;
+    }
+
+    /* Using triadic for labels */
+    .label-blue { background: var(--blue-500); }
+    .label-pink { background: var(--pink-500); }
+    .label-lime { background: var(--lime-500); }
+
+    .card-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .av-1 { background: var(--blue-400); color: var(--neutral-950); }
+    .av-2 { background: var(--pink-400); color: var(--neutral-950); }
+    .av-3 { background: var(--lime-400); color: var(--neutral-950); }
+
+    /* Story points badge */
+    .card-points {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--neutral-800);
+    }
+
+    .points-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--neutral-800);
+      color: var(--neutral-400);
+    }
+
+    .points-badge.highlight {
+      background: hsla(220, 70%, 50%, 0.2);
+      color: var(--blue-400);
+    }
+
+    /* Activity footer */
+    .activity-bar {
+      margin-top: 28px;
+      padding: 20px 24px;
+      background: var(--neutral-900);
+      border: 1px solid var(--neutral-800);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .activity-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .activity-dot.blue { background: var(--blue-500); }
+    .activity-dot.pink { background: var(--pink-500); }
+    .activity-dot.lime { background: var(--lime-500); }
+
+    .activity-text {
+      font-size: 13px;
+      color: var(--neutral-400);
+    }
+
+    .activity-text strong {
+      color: var(--neutral-200);
+      font-weight: 600;
+    }
+
+    .activity-time {
+      font-size: 12px;
+      color: var(--neutral-600);
+      margin-left: auto;
+    }
+
+    .divider {
+      width: 1px;
+      height: 32px;
+      background: var(--neutral-800);
+    }
+
+    /* Velocity chart preview */
+    .velocity-mini {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      margin-left: auto;
+    }
+
+    .velocity-bar {
+      width: 8px;
+      border-radius: 2px;
+      background: var(--neutral-700);
+    }
+
+    .velocity-bar:nth-child(1) { height: 16px; }
+    .velocity-bar:nth-child(2) { height: 24px; background: var(--blue-600); }
+    .velocity-bar:nth-child(3) { height: 20px; background: var(--blue-600); }
+    .velocity-bar:nth-child(4) { height: 32px; background: var(--blue-500); }
+    .velocity-bar:nth-child(5) { height: 28px; background: var(--pink-500); }
+    .velocity-bar:nth-child(6) { height: 36px; background: var(--lime-500); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+      </div>
+
+      <div class="nav-icon active">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+      </div>
+      <div class="nav-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+        </svg>
+        <span class="nav-badge"></span>
+      </div>
+      <div class="nav-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+      </div>
+      <div class="nav-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+      </div>
+
+      <div class="nav-divider"></div>
+
+      <div class="nav-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="header">
+        <div class="header-left">
+          <div class="project-badge">
+            <div class="project-color"></div>
+            <span class="project-name">Platform Team</span>
+          </div>
+          <h1 class="page-title">Sprint Board</h1>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-ghost">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+            </svg>
+            Filter
+          </button>
+          <button class="btn btn-primary">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 4v16m8-8H4"/>
+            </svg>
+            Create
+          </button>
+        </div>
+      </header>
+
+      <div class="quick-stats">
+        <div class="quick-stat">
+          <div class="stat-icon blue">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">24</div>
+            <div class="stat-label">Total Issues</div>
+          </div>
+        </div>
+        <div class="quick-stat">
+          <div class="stat-icon pink">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">8</div>
+            <div class="stat-label">In Progress</div>
+          </div>
+        </div>
+        <div class="quick-stat">
+          <div class="stat-icon lime">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-value">42</div>
+            <div class="stat-label">Story Points</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="board">
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title-wrap">
+              <span class="column-dot dot-todo"></span>
+              <span class="column-title">Backlog</span>
+            </div>
+            <div class="column-add">+</div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-epic">E</div>
+                <span class="card-id">SPK-201</span>
+              </div>
+              <div class="card-title">Design new dashboard layout</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-blue"></span>
+                  <span class="label label-pink"></span>
+                </div>
+                <div class="card-avatar av-1">NR</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge highlight">8 pts</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-task">T</div>
+                <span class="card-id">SPK-202</span>
+              </div>
+              <div class="card-title">Set up E2E testing framework</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-lime"></span>
+                </div>
+                <div class="card-avatar av-3">KM</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge">3 pts</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-story">S</div>
+                <span class="card-id">SPK-203</span>
+              </div>
+              <div class="card-title">User can export reports as PDF</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-pink"></span>
+                </div>
+                <div class="card-avatar av-2">AL</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge">5 pts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title-wrap">
+              <span class="column-dot dot-progress"></span>
+              <span class="column-title">In Progress</span>
+            </div>
+            <div class="column-add">+</div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-story">S</div>
+                <span class="card-id">SPK-195</span>
+              </div>
+              <div class="card-title">Implement real-time notifications</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-blue"></span>
+                  <span class="label label-lime"></span>
+                </div>
+                <div class="card-avatar av-1">NR</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge highlight">8 pts</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-bug">B</div>
+                <span class="card-id">SPK-196</span>
+              </div>
+              <div class="card-title">Fix WebSocket reconnection logic</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-pink"></span>
+                </div>
+                <div class="card-avatar av-2">AL</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge">2 pts</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-task">T</div>
+                <span class="card-id">SPK-197</span>
+              </div>
+              <div class="card-title">Migrate auth to OAuth 2.0</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-blue"></span>
+                </div>
+                <div class="card-avatar av-3">KM</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge highlight">5 pts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title-wrap">
+              <span class="column-dot dot-review"></span>
+              <span class="column-title">Review</span>
+            </div>
+            <div class="column-add">+</div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-story">S</div>
+                <span class="card-id">SPK-190</span>
+              </div>
+              <div class="card-title">Add team collaboration features</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-pink"></span>
+                  <span class="label label-lime"></span>
+                </div>
+                <div class="card-avatar av-1">NR</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge">5 pts</span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon icon-task">T</div>
+                <span class="card-id">SPK-191</span>
+              </div>
+              <div class="card-title">Optimize database queries</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-lime"></span>
+                </div>
+                <div class="card-avatar av-2">AL</div>
+              </div>
+              <div class="card-points">
+                <span class="points-badge">3 pts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title-wrap">
+              <span class="column-dot dot-done"></span>
+              <span class="column-title">Done</span>
+            </div>
+            <div class="column-add">+</div>
+          </div>
+          <div class="cards">
+            <div class="card" style="opacity: 0.6;">
+              <div class="card-header">
+                <div class="card-icon icon-epic">E</div>
+                <span class="card-id">SPK-185</span>
+              </div>
+              <div class="card-title">User authentication flow</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-blue"></span>
+                </div>
+                <div class="card-avatar av-3">KM</div>
+              </div>
+            </div>
+            <div class="card" style="opacity: 0.6;">
+              <div class="card-header">
+                <div class="card-icon icon-story">S</div>
+                <span class="card-id">SPK-186</span>
+              </div>
+              <div class="card-title">Setup CI/CD pipeline</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-lime"></span>
+                </div>
+                <div class="card-avatar av-1">NR</div>
+              </div>
+            </div>
+            <div class="card" style="opacity: 0.6;">
+              <div class="card-header">
+                <div class="card-icon icon-bug">B</div>
+                <span class="card-id">SPK-187</span>
+              </div>
+              <div class="card-title">Fix memory leak in worker</div>
+              <div class="card-footer">
+                <div class="card-labels">
+                  <span class="label label-pink"></span>
+                </div>
+                <div class="card-avatar av-2">AL</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="activity-bar">
+        <div class="activity-item">
+          <span class="activity-dot blue"></span>
+          <span class="activity-text"><strong>NR</strong> moved SPK-195 to In Progress</span>
+        </div>
+        <div class="divider"></div>
+        <div class="activity-item">
+          <span class="activity-dot pink"></span>
+          <span class="activity-text"><strong>AL</strong> commented on SPK-190</span>
+        </div>
+        <div class="divider"></div>
+        <div class="activity-item">
+          <span class="activity-dot lime"></span>
+          <span class="activity-text"><strong>KM</strong> completed SPK-185</span>
+        </div>
+        <div class="velocity-mini">
+          <div class="velocity-bar"></div>
+          <div class="velocity-bar"></div>
+          <div class="velocity-bar"></div>
+          <div class="velocity-bar"></div>
+          <div class="velocity-bar"></div>
+          <div class="velocity-bar"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

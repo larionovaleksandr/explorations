@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grove — Analogous Earth Tones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * COLOR THEORY: ANALOGOUS
+     * Three adjacent hues on the color wheel (30-60° apart):
+     * - Gold: ~50° (golden yellow)
+     * - Amber: ~40° (yellow-orange)
+     * - Rust: ~20° (orange-red)
+     * Creates natural harmony and warmth
+     * Anchored with warm neutrals (stone/sand)
+     */
+
+    :root {
+      /* Gold scale (~50°) */
+      --gold-600: hsl(48, 75%, 40%);
+      --gold-500: hsl(48, 80%, 50%);
+      --gold-400: hsl(48, 85%, 58%);
+      --gold-300: hsl(48, 80%, 70%);
+      --gold-200: hsl(48, 70%, 85%);
+      --gold-100: hsl(48, 60%, 94%);
+
+      /* Amber scale (~40°) - primary */
+      --amber-700: hsl(38, 75%, 30%);
+      --amber-600: hsl(38, 80%, 40%);
+      --amber-500: hsl(38, 85%, 50%);
+      --amber-400: hsl(38, 80%, 60%);
+      --amber-300: hsl(38, 70%, 75%);
+      --amber-200: hsl(38, 60%, 88%);
+      --amber-100: hsl(38, 50%, 95%);
+
+      /* Rust scale (~20°) - accent */
+      --rust-700: hsl(18, 70%, 30%);
+      --rust-600: hsl(18, 75%, 40%);
+      --rust-500: hsl(18, 80%, 50%);
+      --rust-400: hsl(18, 75%, 60%);
+      --rust-300: hsl(18, 65%, 75%);
+      --rust-200: hsl(18, 55%, 88%);
+
+      /* Warm neutrals (stone/sand) */
+      --stone-900: hsl(35, 15%, 12%);
+      --stone-800: hsl(35, 12%, 18%);
+      --stone-700: hsl(35, 10%, 28%);
+      --stone-600: hsl(35, 8%, 40%);
+      --stone-500: hsl(35, 6%, 52%);
+      --stone-400: hsl(35, 8%, 65%);
+      --stone-300: hsl(35, 12%, 78%);
+      --stone-200: hsl(35, 18%, 88%);
+      --stone-100: hsl(35, 25%, 94%);
+      --stone-50: hsl(35, 30%, 98%);
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Karla', -apple-system, sans-serif;
+
+      /* Base-4 Grid System (4px module) */
+      --base: 4px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--stone-100);
+      color: var(--stone-800);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Layout - horizontal nav */
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top navigation */
+    .topnav {
+      background: var(--stone-50);
+      border-bottom: 1px solid var(--stone-200);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      height: 72px;
+      gap: 48px;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--stone-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-leaf {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--amber-400) 0%, var(--rust-500) 100%);
+      border-radius: 50% 0 50% 50%;
+      transform: rotate(-45deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .nav-link {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--stone-600);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--stone-800);
+      background: var(--stone-100);
+    }
+
+    .nav-link.active {
+      background: var(--amber-500);
+      color: var(--stone-900);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .avatar-group {
+      display: flex;
+    }
+
+    .nav-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 3px solid var(--stone-50);
+      margin-left: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-avatar:first-child { margin-left: 0; }
+    .nav-avatar.a1 { background: var(--amber-300); color: var(--amber-700); }
+    .nav-avatar.a2 { background: var(--rust-300); color: var(--rust-700); }
+    .nav-avatar.a3 { background: var(--gold-300); color: var(--gold-600); }
+
+    .btn {
+      padding: 8px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-warm {
+      background: linear-gradient(135deg, var(--amber-500) 0%, var(--rust-500) 100%);
+      color: white;
+      box-shadow: 0 4px 14px hsla(38, 85%, 50%, 0.35);
+    }
+
+    .btn-warm:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px hsla(38, 85%, 50%, 0.45);
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 32px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 32px;
+    }
+
+    .page-info {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .project-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--gold-400) 0%, var(--amber-500) 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--stone-900);
+      margin-bottom: 4px;
+    }
+
+    .page-meta {
+      font-size: 14px;
+      color: var(--stone-500);
+    }
+
+    .page-meta span {
+      color: var(--amber-600);
+      font-weight: 600;
+    }
+
+    .view-toggle {
+      display: flex;
+      background: var(--stone-50);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+      border: 1px solid var(--stone-200);
+    }
+
+    .view-btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--stone-500);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .view-btn:hover {
+      color: var(--stone-700);
+    }
+
+    .view-btn.active {
+      background: white;
+      color: var(--stone-800);
+      box-shadow: 0 1px 3px hsla(35, 15%, 12%, 0.1);
+    }
+
+    /* Board */
+    .board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .column {
+      background: var(--stone-50);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      min-height: 500px;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--stone-200);
+    }
+
+    .column-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .column-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+    }
+
+    .indicator-todo { background: var(--stone-400); }
+    .indicator-progress { background: var(--amber-500); }
+    .indicator-review { background: var(--gold-500); }
+    .indicator-done { background: var(--rust-400); }
+
+    .column-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--stone-800);
+    }
+
+    .column-count {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--stone-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--stone-600);
+    }
+
+    .cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 16px;
+      box-shadow: 0 1px 4px hsla(35, 15%, 12%, 0.06);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px hsla(35, 15%, 12%, 0.12);
+      border-color: var(--amber-300);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .card-type {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    /* Using analogous colors for types */
+    .type-feature { background: var(--amber-100); color: var(--amber-700); }
+    .type-bug { background: var(--rust-200); color: var(--rust-700); }
+    .type-task { background: var(--gold-100); color: var(--gold-600); }
+    .type-improvement { background: var(--stone-200); color: var(--stone-700); }
+
+    .card-priority {
+      display: flex;
+      gap: 4px;
+    }
+
+    .priority-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--stone-300);
+    }
+
+    .priority-dot.active { background: var(--rust-500); }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--stone-900);
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-id {
+      font-size: 12px;
+      color: var(--stone-500);
+      font-weight: 600;
+    }
+
+    .card-assignees {
+      display: flex;
+    }
+
+    .card-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid white;
+      margin-left: -8px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .card-avatar:first-child { margin-left: 0; }
+
+    /* Progress bar on cards */
+    .card-progress {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--stone-100);
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--stone-500);
+      margin-bottom: 6px;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--stone-200);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--amber-400) 0%, var(--gold-400) 100%);
+      border-radius: 2px;
+    }
+
+    /* Stats section */
+    .stats-section {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .stats-main {
+      background: var(--stone-50);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .stats-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--stone-800);
+      margin-bottom: 20px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px;
+      background: white;
+      border-radius: var(--radius-md);
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-value.gold { color: var(--gold-600); }
+    .stat-value.amber { color: var(--amber-600); }
+    .stat-value.rust { color: var(--rust-600); }
+    .stat-value.stone { color: var(--stone-700); }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--stone-500);
+      font-weight: 600;
+    }
+
+    .stats-side {
+      background: linear-gradient(135deg, var(--amber-500) 0%, var(--rust-500) 100%);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      color: white;
+    }
+
+    .side-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      opacity: 0.95;
+    }
+
+    .side-stat {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .side-label {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .side-progress {
+      margin-top: 20px;
+      height: 8px;
+      background: hsla(0, 0%, 100%, 0.25);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .side-progress-fill {
+      height: 100%;
+      background: white;
+      border-radius: 4px;
+      width: 72%;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <nav class="topnav">
+      <div class="logo">
+        <div class="logo-leaf"></div>
+        Grove
+      </div>
+
+      <div class="nav-links">
+        <div class="nav-link">Home</div>
+        <div class="nav-link active">Projects</div>
+        <div class="nav-link">Roadmap</div>
+        <div class="nav-link">Reports</div>
+        <div class="nav-link">Team</div>
+      </div>
+
+      <div class="nav-right">
+        <div class="avatar-group">
+          <div class="nav-avatar a1">EM</div>
+          <div class="nav-avatar a2">JT</div>
+          <div class="nav-avatar a3">SR</div>
+        </div>
+        <button class="btn btn-warm">+ New Task</button>
+      </div>
+    </nav>
+
+    <main class="main">
+      <div class="page-header">
+        <div class="page-info">
+          <div class="project-icon">🌱</div>
+          <div>
+            <h1 class="page-title">Website Refresh</h1>
+            <p class="page-meta">Sprint 8 · <span>72% complete</span> · 18 tasks remaining</p>
+          </div>
+        </div>
+        <div class="view-toggle">
+          <div class="view-btn active">Board</div>
+          <div class="view-btn">List</div>
+          <div class="view-btn">Timeline</div>
+        </div>
+      </div>
+
+      <div class="board">
+        <div class="column">
+          <div class="column-header">
+            <div class="column-left">
+              <div class="column-indicator indicator-todo"></div>
+              <span class="column-title">To Do</span>
+            </div>
+            <div class="column-count">5</div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-feature">Feature</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot"></span>
+                </div>
+              </div>
+              <div class="card-title">Create responsive navigation component</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-089</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a1">EM</div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-task">Task</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot"></span>
+                  <span class="priority-dot"></span>
+                </div>
+              </div>
+              <div class="card-title">Set up analytics tracking</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-090</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a2">JT</div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-improvement">Improvement</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot"></span>
+                  <span class="priority-dot"></span>
+                </div>
+              </div>
+              <div class="card-title">Optimize image loading performance</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-091</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a3">SR</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-left">
+              <div class="column-indicator indicator-progress"></div>
+              <span class="column-title">In Progress</span>
+            </div>
+            <div class="column-count">4</div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-feature">Feature</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot active"></span>
+                </div>
+              </div>
+              <div class="card-title">Build hero section with animated illustrations</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-082</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a1">EM</div>
+                  <div class="card-avatar a3">SR</div>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="progress-label">
+                  <span>Progress</span>
+                  <span>65%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 65%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-bug">Bug</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot active"></span>
+                </div>
+              </div>
+              <div class="card-title">Fix mobile menu overlay z-index</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-083</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a2">JT</div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-task">Task</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot"></span>
+                </div>
+              </div>
+              <div class="card-title">Implement contact form validation</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-084</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a1">EM</div>
+                </div>
+              </div>
+              <div class="card-progress">
+                <div class="progress-label">
+                  <span>Progress</span>
+                  <span>40%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 40%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-left">
+              <div class="column-indicator indicator-review"></div>
+              <span class="column-title">Review</span>
+            </div>
+            <div class="column-count">3</div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-feature">Feature</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot"></span>
+                </div>
+              </div>
+              <div class="card-title">Design testimonials carousel</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-078</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a3">SR</div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-top">
+                <span class="card-type type-improvement">Improvement</span>
+                <div class="card-priority">
+                  <span class="priority-dot active"></span>
+                  <span class="priority-dot"></span>
+                  <span class="priority-dot"></span>
+                </div>
+              </div>
+              <div class="card-title">Add dark mode support</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-079</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a1">EM</div>
+                  <div class="card-avatar a2">JT</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="column-header">
+            <div class="column-left">
+              <div class="column-indicator indicator-done"></div>
+              <span class="column-title">Done</span>
+            </div>
+            <div class="column-count">6</div>
+          </div>
+          <div class="cards">
+            <div class="card" style="opacity: 0.7;">
+              <div class="card-top">
+                <span class="card-type type-task">Task</span>
+              </div>
+              <div class="card-title">Configure build pipeline</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-070</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a2">JT</div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="opacity: 0.7;">
+              <div class="card-top">
+                <span class="card-type type-feature">Feature</span>
+              </div>
+              <div class="card-title">Create footer component</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-071</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a1">EM</div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="opacity: 0.7;">
+              <div class="card-top">
+                <span class="card-type type-improvement">Improvement</span>
+              </div>
+              <div class="card-title">Set up design system tokens</div>
+              <div class="card-footer">
+                <span class="card-id">GRV-072</span>
+                <div class="card-assignees">
+                  <div class="card-avatar a3">SR</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <div class="stats-main">
+          <h3 class="stats-title">Sprint Overview</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value gold">5</div>
+              <div class="stat-label">To Do</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value amber">4</div>
+              <div class="stat-label">In Progress</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value rust">3</div>
+              <div class="stat-label">In Review</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value stone">6</div>
+              <div class="stat-label">Completed</div>
+            </div>
+          </div>
+        </div>
+        <div class="stats-side">
+          <h3 class="side-title">Sprint Progress</h3>
+          <div class="side-stat">72%</div>
+          <div class="side-label">13 of 18 tasks completed</div>
+          <div class="side-progress">
+            <div class="side-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
